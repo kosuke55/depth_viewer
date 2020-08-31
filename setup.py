@@ -12,7 +12,7 @@ install_requires = []
 setup(
     name="depth_viewer",
     version=version,
-    description="depth viwer",
+    description="depth viewer",
     author="kosuke55",
     author_email="kosuke.tnp@gmail.com",
     url="https://github.com/kosuke55/depth_viewer",
@@ -28,7 +28,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts':
-        ['depth_viwer=depth_viewer.apps.view:main']},
+        ['depth_viewer=depth_viewer.apps.view:main']},
     setup_requires=setup_requires,
     install_requires=install_requires,
 )
