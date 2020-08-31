@@ -46,26 +46,33 @@ def main():
     parser.add_argument('--input', '-i', type=str,
                         help='Input filename', required=True)
     parser.add_argument('--min', type=float,
-                        help='min_value', default=-1)
+                        help='min value', default=-1)
     parser.add_argument('--max', type=float,
-                        help='max_value', default=-1)
+                        help='max value', default=-1)
     parser.add_argument('--ignore', type=float,
                         help='ignore_value', default=-1)
+    parser.add_argument('--depth-scale', '-ds', type=float,
+                        help='depth scale', default=-1)
     args = parser.parse_args()
     input_file = args.input
     min_value = None if args.min == -1 else args.min
     max_value = None if args.max == -1 else args.max
     ignore_value = None if args.ignore == -1 else args.ignore
+    depth_scale = None if args.depth_scale == -1 else args.depth_scale  # noqa
 
     root, ext = osp.splitext(input_file)
 
     if 'png' in ext.lower() \
             or 'jpg' in ext.lower() \
             or 'jpeg' in ext.lower():
-        depth = cv2.imread(input_file, cv2.IMREAD_GRAYSCALE).astype(np.float32)
+        # depth = np.asarray(Image.open(input_file), np.float32)
+        depth = cv2.imread(input_file, cv2.IMREAD_ANYDEPTH).astype(np.float32)
 
     if 'npy' in ext:
         depth = np.load(input_file)
+
+    if depth_scale is not None:
+        depth /= depth_scale
 
     print('input depth min:{} max:{}'.format(depth.min(), depth.max()))
     colorized_depth = colorize_depth(
