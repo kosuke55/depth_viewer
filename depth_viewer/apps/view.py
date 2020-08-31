@@ -53,6 +53,8 @@ def main():
                         help='ignore_value', default=-1)
     parser.add_argument('--depth-scale', '-ds', type=float,
                         help='depth scale', default=-1)
+    parser.add_argument('--cloud', '-c', type=int,
+                        help='visualize point cloud', default=0)
     args = parser.parse_args()
     input_file = args.input
     min_value = None if args.min == -1 else args.min
@@ -80,6 +82,20 @@ def main():
     colorized_depth = cv2.cvtColor(colorized_depth, cv2.COLOR_BGR2RGB)
     colorized_depth = Image.fromarray(colorized_depth)
     colorized_depth.show()
+
+    if args.cloud:
+        import open3d as o3d
+        dummy_color_o3d = o3d.geometry.Image(
+            np.full((depth.shape[0], depth.shape[1], 3), 100, np.uint8))
+        depth_o3d = o3d.geometry.Image(depth)
+        print(dummy_color_o3d)
+        print(depth_o3d)
+        rgbd = o3d.geometry.RGBDImage.create_from_color_and_depth(
+            dummy_color_o3d, depth_o3d)
+        pcd = o3d.geometry.PointCloud.create_from_rgbd_image(
+            rgbd, o3d.camera.PinholeCameraIntrinsic(
+                o3d.camera.PinholeCameraIntrinsicParameters.PrimeSenseDefault))
+        o3d.visualization.draw_geometries([pcd])
 
 
 if __name__ == '__main__':
