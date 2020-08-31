@@ -88,8 +88,6 @@ def main():
         dummy_color_o3d = o3d.geometry.Image(
             np.full((depth.shape[0], depth.shape[1], 3), 100, np.uint8))
         depth_o3d = o3d.geometry.Image(depth)
-        print(dummy_color_o3d)
-        print(depth_o3d)
         rgbd = o3d.geometry.RGBDImage.create_from_color_and_depth(
             dummy_color_o3d, depth_o3d)
         pcd = o3d.geometry.PointCloud.create_from_rgbd_image(
