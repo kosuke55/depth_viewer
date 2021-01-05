@@ -28,7 +28,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts':
-        ['depth_viewer=depth_viewer.apps.view:main']},
+        ['depth-viewer=depth_viewer.apps.view:main']},
     setup_requires=setup_requires,
     install_requires=install_requires,
 )

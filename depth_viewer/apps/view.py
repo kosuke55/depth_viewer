@@ -53,8 +53,8 @@ def main():
                         help='ignore_value', default=-1)
     parser.add_argument('--depth-scale', '-ds', type=float,
                         help='depth scale', default=-1)
-    parser.add_argument('--cloud', '-c', type=int,
-                        help='visualize point cloud', default=0)
+    parser.add_argument('--cloud', '-c', action='store_true',
+                        help='visualize point cloud')
     args = parser.parse_args()
     input_file = args.input
     min_value = None if args.min == -1 else args.min
