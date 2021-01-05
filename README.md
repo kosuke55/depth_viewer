@@ -4,7 +4,7 @@
 
 ```
 pip install -e .
-depth_viewer -i data/sample.npy --ignore 0 --cloud
+depth-viewer -i data/sample.npy --ignore 0 --cloud
 ```
 
 colorized depth  
