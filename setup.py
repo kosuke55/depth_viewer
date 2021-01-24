@@ -28,7 +28,9 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts':
-        ['depth-viewer=depth_viewer.apps.view:main']},
+        ['depth-viewer=depth_viewer.apps.view:main',
+        'colorize-depth=depth_viewer.apps.colorize_depth:main']
+        },
     setup_requires=setup_requires,
     install_requires=install_requires,
 )
